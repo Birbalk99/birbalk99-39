@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Database, TrendingUp, Brain } from "lucide-react";
 import heroImage from "@/assets/hero-bg.jpg";
+import { Typewriter } from "react-simple-typewriter";
 
 const FloatingParticle = ({ delay }: { delay: number }) => (
   <div 
@@ -16,11 +17,26 @@ const FloatingParticle = ({ delay }: { delay: number }) => (
   />
 );
 
+// Helper to calculate experience
+function getExperienceString(startYear: number, startMonth: number) {
+  const now = new Date();
+  const start = new Date(startYear, startMonth - 1);
+  let months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+  const years = Math.floor(months / 12);
+  months = months % 12;
+  if (years > 0 && months > 0) return `${years} years and ${months} months`;
+  if (years > 0) return `${years} years`;
+  return `${months} months`;
+}
+
 export const HeroSection = () => {
   const [particles, setParticles] = useState<number[]>([]);
+  const [experience, setExperience] = useState("");
 
   useEffect(() => {
     setParticles(Array.from({ length: 20 }, (_, i) => i));
+    // Set your start date here (Feb 2022)
+    setExperience(getExperienceString(2022, 2));
   }, []);
 
   const scrollToProjects = () => {
@@ -55,16 +71,29 @@ export const HeroSection = () => {
       <div className="relative z-20 text-center px-6 max-w-5xl mx-auto">
         <div className="animate-slide-up">
           <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
-            Data <span className="gradient-text">Scientist</span>
+            Hi, I'm <span className="gradient-text">Birbal Kumar</span>
             <br />
-            <span className="text-glow">Portfolio</span>
+            <span className="text-glow">Data Scientist</span>
           </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            Transforming complex data into actionable insights through 
-            <span className="text-primary"> machine learning</span>, 
-            <span className="text-secondary"> visualization</span>, and 
-            <span className="text-accent"> statistical analysis</span>
+          <div className="text-xl md:text-2xl text-muted-foreground mb-4 mx-auto leading-relaxed min-h-[80px] w-full max-w-8xl text-justify">
+            <Typewriter
+              words={[
+                `Data Scientist with over ${experience} of experience, specializing in AI, Generative AI, LLMs, and Data Science. I have contributed to impactful projects across multiple organizations, leveraging a strong computer science background to solve real-world problems.`
+              ]}
+              loop={1}
+              typeSpeed={15}
+              deleteSpeed={0}
+              delaySpeed={1000}
+            />
+          </div>
+          <p className="text-xl md:text-2xl text-muted-foreground mb-4 mx-auto leading-relaxed min-h-[80px] w-full max-w-8xl text-justify">
+            Passionate about transforming complex data into actionable insights using
+            <span className="text-primary"> Artificial Intelligence</span>,
+            <span className="text-secondary"> Generative AI</span>,
+            <span className="text-accent"> Machine Learning</span>,
+            <span className="text-primary"> Deep Learning</span>,
+            <span className="text-secondary"> Computer Vision</span>, and
+            <span className="text-accent"> advanced analytics</span>.
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -86,8 +115,7 @@ export const HeroSection = () => {
             <Button 
               size="lg" 
               className="bg-primary hover:bg-primary-glow text-primary-foreground shadow-primary animate-glow"
-              onClick={scrollToProjects}
-            >
+              onClick={scrollToProjects}>
               View My Work
               <ChevronDown className="ml-2 h-5 w-5" />
             </Button>
@@ -96,14 +124,21 @@ export const HeroSection = () => {
               size="lg"
               className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
             >
-              Download Resume
+              <a href="/statics/Resume.pdf" download>Download Resume</a>
             </Button>
           </div>
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+      <div
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer"
+        onClick={scrollToProjects}
+        role="button"
+        tabIndex={0}
+        aria-label="Scroll to projects"
+        onKeyPress={e => {
+          if (e.key === "Enter" || e.key === " ") scrollToProjects();
+        }}
+      >
         <ChevronDown className="w-6 h-6 text-primary animate-bounce" />
       </div>
     </section>
