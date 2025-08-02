@@ -8,7 +8,7 @@ import { BookingSection } from './sections/BookingSection';
 import { ServicesSection } from './sections/ServicesSection';
 import { motion, AnimatePresence } from "framer-motion";
 import { ResumePreview } from "@/components/ResumePreview";
-import { ThemeToggle } from "@/components/ThemeToggle";
+
 
 
 // --- NAV ITEMS ANIMATION VARIANTS ---
@@ -193,7 +193,6 @@ export {
   navItems,
   boxItems,
   getActiveSection,
-  ThemeToggle,
 };
 
 export const Navigation = () => {
@@ -304,7 +303,6 @@ export const Navigation = () => {
             >
               Resume
             </Button>
-            <ThemeToggle />
           </div>
 
           {/* Mobile menu button */}
@@ -367,7 +365,6 @@ export const Navigation = () => {
                 >
                   Resume
                 </Button>
-                <ThemeToggle />
               </div>
             </div>
           </div>

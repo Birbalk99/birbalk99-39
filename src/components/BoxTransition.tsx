@@ -23,8 +23,8 @@ const boxDropVariants = {
     opacity: 1,
     transition: {
       type: "spring" as const,
-      stiffness: 60,
-      damping: 12
+      stiffness: 80,
+      damping: 14
     }
   },
   splash: {
