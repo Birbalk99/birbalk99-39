@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Database, TrendingUp, Brain } from "lucide-react";
-import heroImage from "@/assets/hero-bg.jpg";
+import heroImage from "@/assets/hero-bg.gif";
 import { Typewriter } from "react-simple-typewriter";
-
 const FloatingParticle = ({ delay }: { delay: number }) => (
   <div 
     className="data-particle"
@@ -45,17 +44,7 @@ export const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Hero Background */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url(${heroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          opacity: 0.3
-        }}
-      />
-      
+           
       {/* Animated particles */}
       <div className="absolute inset-0 z-10">
         {particles.map((i) => (

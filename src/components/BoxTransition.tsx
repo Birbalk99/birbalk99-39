@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { motion, AnimatePresence } from "framer-motion";
+
+
 
 interface BoxTransitionProps {
   isOpen: boolean;
@@ -10,6 +13,33 @@ interface BoxTransitionProps {
   triggerElement?: HTMLElement | null;
   title?: string;
 }
+
+const boxDropVariants = {
+  initial: { y: 0, scale: 1, borderRadius: "1rem", opacity: 0 },
+  open: {
+    y: "40vh",
+    scale: 1,
+    borderRadius: "1.5rem",
+    opacity: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 60,
+      damping: 12
+    }
+  },
+  splash: {
+    y: "40vh",
+    scale: 1.1,
+    borderRadius: "2rem",
+    opacity: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 80,
+      damping: 14
+    }
+  }
+};
+
 
 export const BoxTransition: React.FC<BoxTransitionProps> = ({
   isOpen,
@@ -66,19 +96,47 @@ export const BoxTransition: React.FC<BoxTransitionProps> = ({
         )}
         onClick={onClose}
       />
-      
-      {/* Box Container */}
-      <div
-        className={cn(
-          "relative bg-background border border-border rounded-xl shadow-glow transition-all duration-700 ease-out overflow-hidden",
-          isAnimating 
-            ? "w-[90vw] h-[90vh] max-w-6xl opacity-100 scale-100" 
-            : "opacity-0 scale-50"
-        )}
+      <motion.div
+        initial={{
+          top:"50%",
+          left:"50%",
+          width: 50,
+          height: 50,
+          scale: 0.5,
+          opacity: 0,
+          borderRadius: "50%",
+          position: "absolute"
+        }}
+        variants={boxDropVariants}
+        animate={{
+          top: "50%",
+          left: "50%",
+          width: "90vw",
+          height: "90vh",
+          scale: 1,
+          opacity: 1,
+          borderRadius: "1rem",
+          x: "-50%",
+          y: "-50%",
+          transition: {
+            type: "spring",
+            stiffness: 50,
+            damping: 12
+          }
+        }}
+        exit={{
+          scale: 0.5,
+          opacity: 0,
+          transition: { duration: 0.3 }
+        }}
+        className="absolute bg-background border border-border rounded-xl shadow-glow w-[90vw] max-w-6xl max-h-[90vh] overflow-hidden z-50 flex flex-col"
         style={{
-          transformOrigin: triggerRect 
+          transformOrigin: triggerRect
             ? `${triggerRect.left + triggerRect.width / 2}px ${triggerRect.top + triggerRect.height / 2}px`
-            : 'center center'
+            : 'center center',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)'
         }}
       >
         {/* Header */}
@@ -97,7 +155,7 @@ export const BoxTransition: React.FC<BoxTransitionProps> = ({
         </div>
 
         {/* Content */}
-        <div className="p-6 h-full overflow-auto">
+        <div className="p-6 overflow-auto flex-1">
           <div 
             className={cn(
               "transition-all duration-500 delay-300",
@@ -107,12 +165,17 @@ export const BoxTransition: React.FC<BoxTransitionProps> = ({
             {children}
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 
-  return createPortal(modalContent, document.body);
-};
+  return createPortal(
+    <AnimatePresence mode="wait">
+      {isOpen && modalContent}
+    </AnimatePresence>,
+    document.body
+  );
+  };
 
 // Hook for managing box transitions
 export const useBoxTransition = () => {
