@@ -58,7 +58,7 @@ export const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="text-xl font-bold gradient-text">
-            DataSci Portfolio
+            The Birbal Studio
           </div>
 
           {/* Desktop Navigation */}

@@ -3,12 +3,21 @@ import { Badge } from "@/components/ui/badge";
 import { Code2, Database, BarChart3, Brain, TrendingUp, Zap } from "lucide-react";
 
 const skills = [
-  { name: "Python", level: 95, icon: Code2, color: "primary" },
-  { name: "Machine Learning", level: 90, icon: Brain, color: "secondary" },
-  { name: "SQL & Databases", level: 88, icon: Database, color: "accent" },
-  { name: "Data Visualization", level: 92, icon: BarChart3, color: "primary" },
-  { name: "Statistical Analysis", level: 85, icon: TrendingUp, color: "secondary" },
-  { name: "Deep Learning", level: 80, icon: Zap, color: "accent" }
+  { name: "Generative AI", level: 95, icon: Brain, color: "primary" },
+  { name: "Large Language Models (LLM)", level: 92, icon: Brain, color: "secondary" },
+  { name: "Prompt Engineering", level: 90, icon: Code2, color: "accent" },
+  { name: "Machine Learning", level: 93, icon: TrendingUp, color: "primary" },
+  { name: "Deep Learning", level: 90, icon: Zap, color: "secondary" },
+  { name: "Natural Language Processing (NLP)", level: 88, icon: BarChart3, color: "accent" },
+  { name: "Computer Vision", level: 85, icon: BarChart3, color: "primary" },
+  { name: "Data Engineering", level: 80, icon: Database, color: "secondary" },
+  { name: "Python", level: 97, icon: Code2, color: "primary" },
+  { name: "SQL & Databases", level: 90, icon: Database, color: "accent" },
+  { name: "Django / Flask / FastAPI", level: 85, icon: Code2, color: "secondary" },
+  { name: "Vector Databases (FAISS, Pinecone, ChromaDB)", level: 80, icon: Database, color: "primary" },
+  { name: "AWS / GCP / Azure", level: 75, icon: Zap, color: "accent" },
+  { name: "MLOps / LLMOps", level: 78, icon: TrendingUp, color: "secondary" },
+  { name: "Data Visualization", level: 82, icon: BarChart3, color: "primary" },
 ];
 
 const technologies = [
@@ -17,7 +26,11 @@ const technologies = [
   "Apache Spark", "Docker", "Git", "AWS", "Azure", "Jupyter"
 ];
 
+import React, { useState } from "react";
+
 export const AboutSection = () => {
+  const [showAllSkills, setShowAllSkills] = useState(false);
+
   return (
     <section id="about" className="py-20 px-6">
       <div className="max-w-7xl mx-auto">
@@ -75,32 +88,42 @@ export const AboutSection = () => {
           {/* Skills */}
           <div className="space-y-6">
             <Card className="glass-card p-8">
-              <h3 className="text-2xl font-semibold mb-8 text-accent">Core Skills</h3>
-              <div className="space-y-6">
-                {skills.map((skill) => {
+                <h3 className="text-2xl font-semibold mb-8 text-accent">Core Skills</h3>
+                <div className="space-y-6">
+                {(showAllSkills ? skills : skills.slice(0, 10)).map((skill) => {
                   const Icon = skill.icon;
                   return (
-                    <div key={skill.name} className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <Icon className={`w-5 h-5 text-${skill.color}`} />
-                          <span className="font-medium">{skill.name}</span>
-                        </div>
-                        <span className="text-sm text-muted-foreground">{skill.level}%</span>
-                      </div>
-                      <div className="skill-bar">
-                        <div 
-                          className="skill-progress"
-                          style={{ 
-                            animationDelay: `${skills.indexOf(skill) * 0.2}s`,
-                            '--progress': `${skill.level}%`
-                          } as React.CSSProperties & { '--progress': string }}
-                        />
-                      </div>
+                  <div key={skill.name} className="space-y-2">
+                    <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Icon className={`w-5 h-5 text-${skill.color}`} />
+                      <span className="font-medium">{skill.name}</span>
                     </div>
+                    <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                    </div>
+                    <div className="skill-bar">
+                    <div 
+                      className="skill-progress"
+                      style={{ 
+                      animationDelay: `${skills.indexOf(skill) * 0.2}s`,
+                      '--progress': `${skill.level}%`
+                      } as React.CSSProperties & { '--progress': string }}
+                    />
+                    </div>
+                  </div>
                   );
                 })}
-              </div>
+                </div>
+                {skills.length > 10 && (
+                <div className="flex justify-center mt-4">
+                    <button
+                    className="px-4 py-2 rounded bg-accent text-accent-foreground hover:bg-accent/80 transition-colors"
+                    onClick={() => setShowAllSkills((prev) => !prev)}
+                    >
+                    {showAllSkills ? "Show less" : "Show more"}
+                    </button>
+                </div>
+                )}
             </Card>
           </div>
         </div>
