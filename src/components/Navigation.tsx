@@ -216,9 +216,9 @@ export const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center gap-3">
             <img
-              src="/statics/logo.gif"
+              src="/logo.gif"
               alt="Logo"
-              className="w-12 h-10 object-contain animate-spin-slow"
+              className="w-14 h-12 object-contain animate-spin-slow"
             />
             <span className="text-xl font-bold gradient-text">
              The Birbal Studio
