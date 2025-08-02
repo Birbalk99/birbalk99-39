@@ -8,20 +8,20 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@datascientist.com",
-    href: "mailto:hello@datascientist.com"
+    value: "birbalk99@gmail.com",
+    href: "mailto:birbalk99@gmail.com"
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+1 (555) 123-4567",
-    href: "tel:+15551234567"
+    value: "+91 7220972090",
+    href: "tel:+917220972090"
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "San Francisco, CA",
-    href: "#"
+    value: "Jaipur, Rajasthan, India",
+    href: "https://maps.app.goo.gl/varL8ZHgcq4SFGAW8"
   }
 ];
 
@@ -29,19 +29,19 @@ const socialLinks = [
   {
     icon: Linkedin,
     label: "LinkedIn",
-    href: "#",
+    href: "https://www.linkedin.com/in/birbalk99/",
     color: "text-blue-400"
   },
   {
     icon: Github,
     label: "GitHub",
-    href: "#",
+    href: "https://github.com/Birbalk99",
     color: "text-primary"
   },
   {
     icon: Twitter,
     label: "Twitter",
-    href: "#",
+    href: "https://x.com/birbalkr99",
     color: "text-blue-400"
   }
 ];

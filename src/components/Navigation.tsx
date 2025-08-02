@@ -56,29 +56,47 @@ const navBeamFlicker = {
 
 // --- BOX ITEMS ANIMATION VARIANTS ---
 const boxDropVariants = {
-  initial: { y: 0, scale: 1, borderRadius: "1rem", boxShadow: "0 2px 12px 0 var(--box-shadow)" },
+  initial: {
+    y: 0,
+    scale: 1,
+    borderRadius: "1rem",
+    boxShadow: "0 2px 12px 0 var(--box-shadow)"
+  },
   morph: {
     y: 120,
     scale: 0.7,
     borderRadius: "50%",
     boxShadow: "0 0 32px 8px var(--primary-glow)",
-    transition: { type: "spring" as const, stiffness: 120, damping: 18 },
-  },
-  splash: {
-    y: "40vh",
-    scale: 1.1,
-    borderRadius: "2rem",
-    boxShadow: "0 8px 48px 0 var(--box-shadow)",
-    transition: { type: "spring" as const, stiffness: 80, damping: 14 },
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 18
+    }
   },
   open: {
     y: "40vh",
     scale: 1,
     borderRadius: "1.5rem",
     boxShadow: "0 12px 64px 0 var(--primary-glow)",
-    transition: { type: "spring" as const, stiffness: 60, damping: 12 },
+    transition: {
+      type: "spring",
+      stiffness: 40,
+      damping: 20,
+    },
   },
+  splash: {
+    y: "40vh",
+    scale: 1.05,
+    borderRadius: "2rem",
+    boxShadow: "0 8px 48px 0 var(--box-shadow)",
+    transition: {
+      type: "spring",
+      stiffness: 35,
+      damping: 18,
+    },
+  }
 };
+
 
 const boxIconVariants = {
   initial: { rotate: 0, filter: "brightness(1)" },
@@ -357,21 +375,25 @@ export const Navigation = () => {
       </div>
 
       {/* Box Transition Modal */}
-      <BoxTransition
-        isOpen={isBoxOpen}
-        onClose={closeBox}
-        triggerElement={triggerElement}
-        title={currentSection}
-      >
-        {currentSection && (() => {
-          const selectedItem = boxItems.find(item => item.name === currentSection);
-          if (selectedItem) {
-            const Component = selectedItem.component;
-            return <Component />;
-          }
-          return null;
-        })()}
-      </BoxTransition>
+      <AnimatePresence mode="wait">
+        {isBoxOpen && (
+          <BoxTransition
+            isOpen={isBoxOpen}
+            onClose={closeBox}
+            triggerElement={triggerElement}
+            title={currentSection}
+          >
+            {currentSection && (() => {
+              const selectedItem = boxItems.find(item => item.name === currentSection);
+              if (selectedItem) {
+                const Component = selectedItem.component;
+                return <Component />;
+              }
+              return null;
+            })()}
+          </BoxTransition>
+        )}
+      </AnimatePresence>
       <ResumePreview isOpen={showResume} onClose={() => setShowResume(false)} />
     </nav>
   );

@@ -62,8 +62,6 @@ const technologies = [
 
 
 export const AboutSection = () => {
-  const [showAllSkills, setShowAllSkills] = useState(false);
-
   return (
     <section id="about" className="py-20 px-6">
       <div className="max-w-7xl mx-auto">
@@ -139,42 +137,32 @@ export const AboutSection = () => {
           {/* Skills */}
           <div className="space-y-6">
             <Card className="glass-card p-8">
-                <h3 className="text-2xl font-semibold mb-8 text-accent">Core Skills</h3>
-                <div className="space-y-6">
-                {(showAllSkills ? skills : skills.slice(0, 10)).map((skill) => {
+              <h3 className="text-2xl font-semibold mb-8 text-accent">Core Skills</h3>
+              <div className="space-y-6">
+                {skills.map((skill) => {
                   const Icon = skill.icon;
                   return (
-                  <div key={skill.name} className="space-y-2">
-                    <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Icon className={`w-5 h-5 text-${skill.color}`} />
-                      <span className="font-medium">{skill.name}</span>
+                    <div key={skill.name} className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Icon className={`w-5 h-5 text-${skill.color}`} />
+                          <span className="font-medium">{skill.name}</span>
+                        </div>
+                        <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                      </div>
+                      <div className="skill-bar">
+                        <div 
+                          className="skill-progress"
+                          style={{ 
+                            animationDelay: `${skills.indexOf(skill) * 0.2}s`,
+                            '--progress': `${skill.level}%`
+                          } as React.CSSProperties & { '--progress': string }}
+                        />
+                      </div>
                     </div>
-                    <span className="text-sm text-muted-foreground">{skill.level}%</span>
-                    </div>
-                    <div className="skill-bar">
-                    <div 
-                      className="skill-progress"
-                      style={{ 
-                      animationDelay: `${skills.indexOf(skill) * 0.2}s`,
-                      '--progress': `${skill.level}%`
-                      } as React.CSSProperties & { '--progress': string }}
-                    />
-                    </div>
-                  </div>
                   );
                 })}
-                </div>
-                {skills.length > 10 && (
-                <div className="flex justify-center mt-4">
-                    <button
-                    className="px-4 py-2 rounded bg-accent text-accent-foreground hover:bg-accent/80 transition-colors"
-                    onClick={() => setShowAllSkills((prev) => !prev)}
-                    >
-                    {showAllSkills ? "Show less" : "Show more"}
-                    </button>
-                </div>
-                )}
+              </div>
             </Card>
           </div>
         </div>
