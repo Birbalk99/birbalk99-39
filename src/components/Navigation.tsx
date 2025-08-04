@@ -8,6 +8,7 @@ import { BookingSection } from './sections/BookingSection';
 import { ServicesSection } from './sections/ServicesSection';
 import { motion, AnimatePresence } from "framer-motion";
 import { ResumePreview } from "@/components/ResumePreview";
+import { useMemo } from "react";
 
 
 
@@ -156,6 +157,12 @@ const boxItems = [
   { name: 'Book Meeting', icon: Calendar, component: BookingSection },
 ];
 
+const logoOptions = [
+  "/logo.gif",
+  "/logo-1.gif",
+  "/logo-3.gif"
+];
+
 // --- UTILS ---
 function getActiveSection() {
   // Simple scrollspy logic (customize as needed)
@@ -224,6 +231,14 @@ export const Navigation = () => {
     openBox(event.currentTarget);
   };
 
+  // Random logo selection
+  const logoOptions = ["/logo.gif", "/logo-1.gif", "/logo-2.gif"];
+  const randomLogo = useMemo(() => {
+    const index = Math.floor(Math.random() * logoOptions.length);
+    return logoOptions[index];
+  }, []);
+
+
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
       scrolled ? "bg-background/80 backdrop-blur-lg border-b border-border shadow-subtle" : "bg-transparent"
@@ -233,14 +248,15 @@ export const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center gap-3">
             <img
-              src="/logo.gif"
+              src={randomLogo}
               alt="Logo"
               className="w-14 h-12 object-contain animate-spin-slow"
             />
             <span className="text-xl font-bold gradient-text">
-             The Birbal Studio
+              The Birbal Studio
             </span>
           </div>
+
 
 
           {/* Desktop Navigation */}

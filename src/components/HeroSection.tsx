@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Database, TrendingUp, Brain } from "lucide-react";
-import heroImage from "@/assets/hero-bg.gif";
 import { Typewriter } from "react-simple-typewriter";
 const FloatingParticle = ({ delay }: { delay: number }) => (
   <div 
@@ -15,6 +14,32 @@ const FloatingParticle = ({ delay }: { delay: number }) => (
     }}
   />
 );
+const badgeList = [
+  { label: "Generative AI", icon: "artificial-intelligence.gif"},
+  { label: "LLMs", icon: "llm.gif" },
+  { label: "LangChain", icon: "langchain.png" },
+  { label: "LangGraph", icon: "langgraph.svg" },
+  { label: "CrewAI", icon: "crewai.svg" },
+  { label: "AutoGen", icon: "autogen.gif" },
+  { label: "Prompt Engineering", icon: "tools.gif" },
+  { label: "Agentic Workflow", icon: "workflow.gif" },
+  { label: "RAG", icon: "rag.gif" },
+  { label: "FastAPI", icon: "fastapi.gif" },
+  { label: "Celery", icon: "celery.gif" },
+  { label: "Redis", icon: "redis.gif" },
+  { label: "MongoDB", icon: "mongo.gif" },
+  { label: "FAISS", icon: "faiss.gif" },
+  { label: "ChromaDB", icon: "chromadb.gif" },
+  { label: "Pinecone", icon: "pinecone.gif" },
+  { label: "Neo4j", icon: "neo4j.gif" },
+  { label: "Graph Databases", icon: "graphdb.gif" },
+  { label: "Computer Vision", icon: "cv.gif" },
+  { label: "NLP", icon: "nlp.gif" },
+  { label: "OpenCV", icon: "opencv.gif" },
+  { label: "TTS / STT", icon: "tts.gif" },
+  { label: "WebSockets", icon: "websockets.gif" }
+];
+
 
 // Helper to calculate experience
 function getExperienceString(startYear: number, startMonth: number) {
@@ -55,7 +80,6 @@ export const HeroSection = () => {
       {/* Glow effects */}
       <div className="hero-glow absolute top-1/4 left-1/4 w-96 h-96 z-10" />
       <div className="hero-glow absolute bottom-1/4 right-1/4 w-80 h-80 z-10" />
-
       {/* Content */}
       <div className="relative z-20 text-center px-6 max-w-5xl mx-auto">
         <div className="animate-slide-up">
@@ -85,19 +109,20 @@ export const HeroSection = () => {
             <span className="text-accent"> advanced analytics</span>.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <div className="flex items-center gap-2 glass-card px-4 py-2 rounded-full">
-              <Database className="w-5 h-5 text-primary" />
-              <span className="text-sm">Big Data</span>
-            </div>
-            <div className="flex items-center gap-2 glass-card px-4 py-2 rounded-full">
-              <Brain className="w-5 h-5 text-secondary" />
-              <span className="text-sm">Machine Learning</span>
-            </div>
-            <div className="flex items-center gap-2 glass-card px-4 py-2 rounded-full">
-              <TrendingUp className="w-5 h-5 text-accent" />
-              <span className="text-sm">Analytics</span>
-            </div>
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {badgeList.map(({ label, icon }) => (
+              <div
+                key={label}
+                className="flex items-center gap-2 glass-card px-4 py-2 rounded-full hover:scale-105 transition-transform"
+              >
+                <img
+                  src={`/icons/${icon}`}
+                  alt={label}
+                  className="w-5 h-5 object-contain"
+                />
+                <span className="text-sm">{label}</span>
+              </div>
+            ))}
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
