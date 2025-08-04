@@ -1,5 +1,7 @@
 // _app.tsx or layout.tsx
 import { ThemeProvider } from "next-themes";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -9,6 +11,8 @@ export default function App({ Component, pageProps }) {
       enableSystem={true}
     >
       <Component {...pageProps} />
+      <Analytics />
+      <SpeedInsights />
     </ThemeProvider>
   );
 }
