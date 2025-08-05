@@ -40,7 +40,7 @@ export const ResumePreview = ({ isOpen, onClose }: { isOpen: boolean, onClose: (
               <a
                 href="/Resume.pdf"
                 download
-                className="inline-flex items-center px-4 py-2 border border-primary text-primary hover:bg-primary hover:text-white rounded-lg transition"
+                className="inline-flex items-center px-4 py-2 bg-white/10 border border-primary text-primary hover:bg-primary hover:text-white rounded-lg transition backdrop-blur-sm"
               >
                 Download Resume
               </a>

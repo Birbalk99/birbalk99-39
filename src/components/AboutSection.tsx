@@ -1,38 +1,28 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Code2, Database, BarChart3, Brain, TrendingUp, Zap } from "lucide-react";
+import { Code2, Database, BarChart3, Brain, TrendingUp, Zap, Cloud } from "lucide-react";
+import { CertificateSection } from "@/components/certificate-section";
 
 const skills = [
   { name: "Artificial Intelligence", level: 96, icon: Brain, color: "primary" },
   { name: "Generative AI", level: 95, icon: Zap, color: "secondary" },
   { name: "Large Language Models (LLMs)", level: 94, icon: BarChart3, color: "accent" },
   { name: "Prompt Engineering", level: 92, icon: Code2, color: "primary" },
-
-
   { name: "Machine Learning", level: 90, icon: Brain, color: "secondary" },
   { name: "Deep Learning", level: 88, icon: Zap, color: "accent" },
   { name: "Natural Language Processing (NLP)", level: 87, icon: Code2, color: "primary" },
-
-
-  { name: "Statistical Analysis", level: 85, icon: TrendingUp, color: "secondary" },
-  { name: "Data Visualization", level: 85, icon: BarChart3, color: "accent" },
   { name: "SQL & Databases", level: 82, icon: Database, color: "primary" },
-
   { name: "Python", level: 95, icon: Code2, color: "secondary" },
   { name: "FastAPI / Flask / Django", level: 88, icon: Code2, color: "accent" },
-  { name: "Vector Search (FAISS, MongoDB)", level: 84, icon: Database, color: "primary" },
-  { name: "Cloud Platforms (AWS, Azure, GCP)", level: 80, icon: Database, color: "secondary" },
+  { name: "Vector Search (FAISS, MongoDB, Pinecone, ChromaDB)", level: 84, icon: Database, color: "primary" },
+  { name: "Cloud Platforms (AWS, Azure, GCP)", level: 80, icon: Cloud, color: "secondary" },
   { name: "Docker & Containerization", level: 78, icon: Zap, color: "accent" },
   { name: "MLOps & LLMOps", level: 75, icon: TrendingUp, color: "primary" },
-
   { name: "Data Engineering", level: 85, icon: Database, color: "secondary" },
-  { name: "Big Data Technologies (Spark)", level: 80, icon: BarChart3, color: "accent" },
-  { name: "Data Warehousing", level: 78, icon: Database, color: "primary" },
-  { name: "ETL Pipelines", level: 76, icon: Database, color: "secondary" },
-  { name: "AWS / Azure / GCP", level: 80, icon: Database, color: "secondary" },
-  { name: "MLOps & LLMOps", level: 78, icon: TrendingUp, color: "accent" }
+  { name: "Problem Solving", level: 98, icon: Brain, color: "primary" },
+  { name: "System Design", level: 90, icon: BarChart3, color: "secondary" },
+  { name: "AWS (DocumentDB,)", level: 80, icon: Cloud, color: "primary" }
 ];
-
 
 const technologies = [
   // 🧑‍💻 Programming & Scripting
@@ -81,7 +71,7 @@ export const AboutSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Story */}
           <div className="space-y-6">
-            <Card className="glass-card p-8">
+            <Card className="p-8 w-full bg-red-500/5 backdrop-blur-md border border-white/10 shadow-md hover:shadow-xl hover:scale-[1.01] transition-all duration-700">
               <h3 className="text-2xl font-semibold mb-4 text-primary">My Journey</h3>
               <div className="space-y-6 text-muted-foreground text-lg leading-relaxed text-justify max-w-7xl mx-auto">
                 <p>
@@ -118,7 +108,7 @@ export const AboutSection = () => {
             </Card>
 
             {/* Technology Stack */}
-            <Card className="glass-card p-8">
+            <Card className="p-8 w-full bg-cyan-500/5 backdrop-blur-md border border-white/20 shadow-md hover:shadow-xl hover:scale-[1.01] transition-all duration-700">
               <h3 className="text-2xl font-semibold mb-6 text-secondary">Technology Stack</h3>
               <div className="flex flex-wrap gap-2">
                 {technologies.map((tech) => (
@@ -133,10 +123,9 @@ export const AboutSection = () => {
               </div>
             </Card>
           </div>
-
           {/* Skills */}
           <div className="space-y-6">
-            <Card className="glass-card p-8">
+            <Card className="p-8 w-full bg-purple-500/5 backdrop-blur-md border border-white/10 shadow-md hover:shadow-xl hover:scale-[1.01] transition-all duration-700">
               <h3 className="text-2xl font-semibold mb-8 text-accent">Core Skills</h3>
               <div className="space-y-6">
                 {skills.map((skill) => {
@@ -166,6 +155,8 @@ export const AboutSection = () => {
             </Card>
           </div>
         </div>
+        <br></br>
+        <CertificateSection />
       </div>
     </section>
   );
