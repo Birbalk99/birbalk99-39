@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Database, TrendingUp, Brain } from "lucide-react";
+import { ChevronDown, Download } from "lucide-react";
 import { Typewriter } from "react-simple-typewriter";
+import { SparklesText } from "@/components/magicui/sparkles-text";
+
+
 const FloatingParticle = ({ delay }: { delay: number }) => (
   <div 
     className="data-particle"
@@ -15,32 +18,26 @@ const FloatingParticle = ({ delay }: { delay: number }) => (
   />
 );
 const badgeList = [
-  { label: "Generative AI", icon: "artificial-intelligence.gif"},
   { label: "LLMs", icon: "llm.gif" },
+  { label: "OpenCV", icon: "OpenCV.png" },
   { label: "LangChain", icon: "langchain.png" },
   { label: "LangGraph", icon: "langgraph.svg" },
   { label: "CrewAI", icon: "crewai.svg" },
-  { label: "AutoGen", icon: "autogen.gif" },
+  { label: "AutoGen", icon: "autogen.svg" },
   { label: "Prompt Engineering", icon: "tools.gif" },
   { label: "Agentic Workflow", icon: "workflow.gif" },
-  { label: "RAG", icon: "rag.gif" },
-  { label: "FastAPI", icon: "fastapi.gif" },
-  { label: "Celery", icon: "celery.gif" },
-  { label: "Redis", icon: "redis.gif" },
-  { label: "MongoDB", icon: "mongo.gif" },
-  { label: "FAISS", icon: "faiss.gif" },
-  { label: "ChromaDB", icon: "chromadb.gif" },
-  { label: "Pinecone", icon: "pinecone.gif" },
-  { label: "Neo4j", icon: "neo4j.gif" },
-  { label: "Graph Databases", icon: "graphdb.gif" },
-  { label: "Computer Vision", icon: "cv.gif" },
-  { label: "NLP", icon: "nlp.gif" },
-  { label: "OpenCV", icon: "opencv.gif" },
-  { label: "TTS / STT", icon: "tts.gif" },
-  { label: "WebSockets", icon: "websockets.gif" }
+  { label: "RAG", icon: "artificial-intelligence.gif" },
+  { label: "FastAPI", icon: "fastapi.png" },
+  { label: "MongoDB", icon: "MongoDB.png" },
+  { label: "FAISS", icon: "faiss.png" },
+  { label: "ChromaDB", icon: "Chromadb.png" },
+  { label: "Pinecone", icon: "Pinecone.svg" },
+  { label: "Neo4j", icon: "Neo4j.svg" },
+  { label: "Computer Vision", icon: "vision.png" },
+  { label: "NLP", icon: "nlp.png" },
+  { label: "TTS / STT", icon: "Audiomack.svg" },
+  { label: "WebSockets", icon: "websocket.svg" }
 ];
-
-
 // Helper to calculate experience
 function getExperienceString(startYear: number, startMonth: number) {
   const now = new Date();
@@ -86,7 +83,9 @@ export const HeroSection = () => {
           <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
             Hi, I'm <span className="gradient-text">Birbal Kumar</span>
             <br />
-            <span className="text-glow">Data Scientist</span>
+            <SparklesText>
+              <span className="text-glow text-6xl md:text-8xl">Data Scientist</span>
+            </SparklesText>
           </h1>
           <div className="text-xl md:text-2xl text-muted-foreground mb-4 mx-auto leading-relaxed min-h-[80px] w-full max-w-8xl text-justify">
             <Typewriter
@@ -108,7 +107,6 @@ export const HeroSection = () => {
             <span className="text-secondary"> Computer Vision</span>, and
             <span className="text-accent"> advanced analytics</span>.
           </p>
-
           <div className="flex flex-wrap justify-center gap-2 mb-12">
             {badgeList.map(({ label, icon }) => (
               <div
@@ -124,22 +122,26 @@ export const HeroSection = () => {
               </div>
             ))}
           </div>
-
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-primary hover:bg-primary-glow text-primary-foreground shadow-primary animate-glow"
-              onClick={scrollToProjects}>
-              View My Work
-              <ChevronDown className="ml-2 h-5 w-5" />
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            <button
+              onClick={scrollToProjects}
+              className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 animate-glow"
             >
-              <a href="/statics/Resume.pdf" download>Download Resume</a>
-            </Button>
+              <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+              <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-slate-950 px-6 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+                View My Work
+                <ChevronDown className="ml-2 h-5 w-5 animate-bounce group-hover:animate-ping" />
+              </span>
+            </button>
+            <a href="/Resume.pdf" download>
+              <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+                <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+                  Download Resume
+                  <Download className="ml-2 h-5 w-5 animate-bounce group-hover:animate-ping"/>
+                </span>
+              </button>
+            </a>
           </div>
         </div>
       </div>

@@ -9,6 +9,7 @@ import { ServicesSection } from './sections/ServicesSection';
 import { motion, AnimatePresence } from "framer-motion";
 import { ResumePreview } from "@/components/ResumePreview";
 import { useMemo } from "react";
+import { CoolMode } from "@/components/magicui/cool-mode";
 
 
 
@@ -252,9 +253,11 @@ export const Navigation = () => {
               alt="Logo"
               className="w-14 h-12 object-contain animate-spin-slow"
             />
-            <span className="text-xl font-bold gradient-text">
-              The Birbal Studio
-            </span>
+            <CoolMode>
+              <span className="text-xl font-bold gradient-text">
+                The Birbal Studio
+              </span>
+            </CoolMode>
           </div>
 
 
