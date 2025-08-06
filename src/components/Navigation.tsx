@@ -370,7 +370,6 @@ export const Navigation = () => {
           </div>
         )}
       </div>
-
       {/* Box Transition Modal */}
       <AnimatePresence mode="wait">
         {isBoxOpen && (
