@@ -29,7 +29,7 @@ export const ResumePreview = ({ isOpen, onClose }: { isOpen: boolean, onClose: (
 
             {/* PDF Viewer */}
             <iframe
-              src="/Resume.pdf"
+              src="/Birbal_DataScientist_Resume.pdf"
               title="Resume Preview"
               className="w-full h-full"
               frameBorder="0"
@@ -38,7 +38,7 @@ export const ResumePreview = ({ isOpen, onClose }: { isOpen: boolean, onClose: (
             {/* Download Button */}
             <div className="absolute bottom-4 left-4">
               <a
-                href="/Resume.pdf"
+                href="/Birbal_DataScientist_Resume.pdf"
                 download
                 className="inline-flex items-center px-4 py-2 bg-white/10 border border-primary text-primary hover:bg-primary hover:text-white rounded-lg transition backdrop-blur-sm"
               >
