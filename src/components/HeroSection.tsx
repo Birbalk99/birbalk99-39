@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Database, TrendingUp, Brain } from "lucide-react";
-import heroImage from "@/assets/hero-bg.gif";
+import { ChevronDown, Download } from "lucide-react";
 import { Typewriter } from "react-simple-typewriter";
+import { SparklesText } from "@/components/magicui/sparkles-text";
+
+
 const FloatingParticle = ({ delay }: { delay: number }) => (
   <div 
     className="data-particle"
@@ -15,7 +17,27 @@ const FloatingParticle = ({ delay }: { delay: number }) => (
     }}
   />
 );
-
+const badgeList = [
+  { label: "LLMs", icon: "llm.gif" },
+  { label: "OpenCV", icon: "OpenCV.png" },
+  { label: "LangChain", icon: "langchain.png" },
+  { label: "LangGraph", icon: "langgraph.svg" },
+  { label: "CrewAI", icon: "crewai.svg" },
+  { label: "AutoGen", icon: "autogen.svg" },
+  { label: "Prompt Engineering", icon: "tools.gif" },
+  { label: "Agentic Workflow", icon: "workflow.gif" },
+  { label: "RAG", icon: "artificial-intelligence.gif" },
+  { label: "FastAPI", icon: "fastapi.png" },
+  { label: "MongoDB", icon: "MongoDB.png" },
+  { label: "FAISS", icon: "faiss.png" },
+  { label: "ChromaDB", icon: "Chromadb.png" },
+  { label: "Pinecone", icon: "Pinecone.svg" },
+  { label: "Neo4j", icon: "Neo4j.svg" },
+  { label: "Computer Vision", icon: "vision.png" },
+  { label: "NLP", icon: "nlp.png" },
+  { label: "TTS / STT", icon: "Audiomack.svg" },
+  { label: "WebSockets", icon: "websocket.svg" }
+];
 // Helper to calculate experience
 function getExperienceString(startYear: number, startMonth: number) {
   const now = new Date();
@@ -55,14 +77,15 @@ export const HeroSection = () => {
       {/* Glow effects */}
       <div className="hero-glow absolute top-1/4 left-1/4 w-96 h-96 z-10" />
       <div className="hero-glow absolute bottom-1/4 right-1/4 w-80 h-80 z-10" />
-
       {/* Content */}
       <div className="relative z-20 text-center px-6 max-w-5xl mx-auto">
         <div className="animate-slide-up">
           <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
             Hi, I'm <span className="gradient-text">Birbal Kumar</span>
             <br />
-            <span className="text-glow">Data Scientist</span>
+            <SparklesText>
+              <span className="text-glow text-6xl md:text-8xl">Data Scientist</span>
+            </SparklesText>
           </h1>
           <div className="text-xl md:text-2xl text-muted-foreground mb-4 mx-auto leading-relaxed min-h-[80px] w-full max-w-8xl text-justify">
             <Typewriter
@@ -84,37 +107,41 @@ export const HeroSection = () => {
             <span className="text-secondary"> Computer Vision</span>, and
             <span className="text-accent"> advanced analytics</span>.
           </p>
-
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <div className="flex items-center gap-2 glass-card px-4 py-2 rounded-full">
-              <Database className="w-5 h-5 text-primary" />
-              <span className="text-sm">Big Data</span>
-            </div>
-            <div className="flex items-center gap-2 glass-card px-4 py-2 rounded-full">
-              <Brain className="w-5 h-5 text-secondary" />
-              <span className="text-sm">Machine Learning</span>
-            </div>
-            <div className="flex items-center gap-2 glass-card px-4 py-2 rounded-full">
-              <TrendingUp className="w-5 h-5 text-accent" />
-              <span className="text-sm">Analytics</span>
-            </div>
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {badgeList.map(({ label, icon }) => (
+              <div
+                key={label}
+                className="flex items-center gap-2 glass-card px-4 py-2 rounded-full hover:scale-105 transition-transform"
+              >
+                <img
+                  src={`/icons/${icon}`}
+                  alt={label}
+                  className="w-5 h-5 object-contain"
+                />
+                <span className="text-sm">{label}</span>
+              </div>
+            ))}
           </div>
-
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-primary hover:bg-primary-glow text-primary-foreground shadow-primary animate-glow"
-              onClick={scrollToProjects}>
-              View My Work
-              <ChevronDown className="ml-2 h-5 w-5" />
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            <button
+              onClick={scrollToProjects}
+              className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 animate-glow"
             >
-              <a href="/statics/Resume.pdf" download>Download Resume</a>
-            </Button>
+              <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+              <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-slate-950 px-6 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+                View My Work
+                <ChevronDown className="ml-2 h-5 w-5 animate-bounce group-hover:animate-ping" />
+              </span>
+            </button>
+            <a href="/Birbal_DataScientist_Resume.pdf" download>
+              <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+                <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+                  Download Resume
+                  <Download className="ml-2 h-5 w-5 animate-bounce group-hover:animate-ping"/>
+                </span>
+              </button>
+            </a>
           </div>
         </div>
       </div>

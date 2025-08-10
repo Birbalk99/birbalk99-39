@@ -8,6 +8,8 @@ import { BookingSection } from './sections/BookingSection';
 import { ServicesSection } from './sections/ServicesSection';
 import { motion, AnimatePresence } from "framer-motion";
 import { ResumePreview } from "@/components/ResumePreview";
+import { useMemo } from "react";
+import { CoolMode } from "@/components/magicui/cool-mode";
 
 
 
@@ -96,8 +98,6 @@ const boxDropVariants = {
     },
   }
 };
-
-
 const boxIconVariants = {
   initial: { rotate: 0, filter: "brightness(1)" },
   hover: {
@@ -150,10 +150,16 @@ const navItems = [
 ];
 
 const boxItems = [
-  { name: 'Articles', icon: BookOpen, component: ArticlesSection },
-  { name: 'Services', icon: Briefcase, component: ServicesSection },
-  { name: 'Feedback', icon: MessageSquare, component: FeedbackSection },
-  { name: 'Book Meeting', icon: Calendar, component: BookingSection },
+  { name: 'Articles', icon: BookOpen, component: ArticlesSection,disabled: true },
+  { name: 'Services', icon: Briefcase, component: ServicesSection,disabled: true },
+  { name: 'Feedback', icon: MessageSquare, component: FeedbackSection,disabled: true },
+  { name: 'Book Meeting', icon: Calendar, component: BookingSection,disabled: true },
+];
+
+const logoOptions = [
+  "/logo.gif",
+  "/logo-1.gif",
+  "/logo-3.gif"
 ];
 
 // --- UTILS ---
@@ -224,6 +230,14 @@ export const Navigation = () => {
     openBox(event.currentTarget);
   };
 
+  // Random logo selection
+  const logoOptions = ["/logo.gif", "/logo-1.gif", "/logo-2.gif"];
+  const randomLogo = useMemo(() => {
+    const index = Math.floor(Math.random() * logoOptions.length);
+    return logoOptions[index];
+  }, []);
+
+
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
       scrolled ? "bg-background/80 backdrop-blur-lg border-b border-border shadow-subtle" : "bg-transparent"
@@ -233,14 +247,17 @@ export const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center gap-3">
             <img
-              src="/logo.gif"
+              src={randomLogo}
               alt="Logo"
               className="w-14 h-12 object-contain animate-spin-slow"
             />
-            <span className="text-xl font-bold gradient-text">
-             The Birbal Studio
-            </span>
+            <CoolMode>
+              <span className="text-xl font-bold gradient-text">
+                The Birbal Studio
+              </span>
+            </CoolMode>
           </div>
+
 
 
           {/* Desktop Navigation */}
@@ -275,14 +292,15 @@ export const Navigation = () => {
               {boxItems.map((item, index) => (
                 <motion.button
                   key={item.name}
-                  onClick={(e) => handleBoxOpen(item.name, e)}
+                  onClick={(e) => !item.disabled && handleBoxOpen(item.name, e)}
+                  disabled={item.disabled}
                   initial="initial"
-                  whileHover="hover"
-                  whileTap="tap"
+                  whileHover={!item.disabled && "hover"}
+                  whileTap={!item.disabled && "tap"}
                   variants={boxIconVariants}
-                  className="relative flex items-center gap-2 px-4 py-2 rounded-lg text-muted-foreground hover:text-primary transition-colors font-medium overflow-hidden"
+                  className={`relative flex items-center gap-2 px-4 py-2 rounded-lg font-medium overflow-hidden 
+                    ${item.disabled ? "opacity-50 cursor-not-allowed" : "text-muted-foreground hover:text-primary transition-colors"}`}
                 >
-                  {/* Ripple on click */}
                   <motion.span
                     variants={boxRippleVariants}
                     initial="initial"
@@ -293,7 +311,6 @@ export const Navigation = () => {
                   <span className="z-10">{item.name}</span>
                 </motion.button>
               ))}
-
             </div>
             {/* Resume Button */}
             <Button 

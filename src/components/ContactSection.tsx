@@ -1,8 +1,11 @@
+import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Linkedin, Github, Twitter } from "lucide-react";
+import type { NextApiRequest, NextApiResponse } from "next";
+import nodemailer from "nodemailer";
 
 const contactInfo = [
   {
@@ -47,6 +50,62 @@ const socialLinks = [
 ];
 
 export const ContactSection = () => {
+  // Form state
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  // Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  // Basic email validation
+  const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
+  // Submit handler
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
+    if (!form.firstName.trim() || !form.lastName.trim()) {
+      setError("Please enter your full name.");
+      return;
+    }
+    if (!validateEmail(form.email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    if (!form.subject.trim()) {
+      setError("Please enter a subject.");
+      return;
+    }
+    if (!form.message.trim()) {
+      setError("Please enter your message.");
+      return;
+    }
+    setLoading(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!response.ok) throw new Error("Failed to send message.");
+      setSuccess("Message sent successfully! I'll get back to you soon.");
+      setForm({ firstName: "", lastName: "", email: "", subject: "", message: "" });
+    } catch (err: any) {
+      setError(err.message || "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <section id="contact" className="py-20 px-6">
       <div className="max-w-7xl mx-auto">
@@ -55,69 +114,85 @@ export const ContactSection = () => {
             Let's <span className="gradient-text">Connect</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Interested in collaborating on data science projects or discussing 
-            opportunities? I'd love to hear from you.
+            Interested in collaborating on Data Scientist/Generative AI Project or discussing opportunities? I'd love to hear from you.
           </p>
         </div>
-
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
           <Card className="glass-card p-8">
             <h3 className="text-2xl font-semibold mb-6 text-primary">Send a Message</h3>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-sm font-medium">First Name</label>
-                  <Input 
-                    placeholder="John" 
+                  <Input
+                    name="firstName"
+                    value={form.firstName}
+                    onChange={handleChange}
+                    placeholder="First Name"
                     className="bg-background-secondary border-border focus:border-primary"
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Last Name</label>
-                  <Input 
-                    placeholder="Doe" 
+                  <Input
+                    name="lastName"
+                    value={form.lastName}
+                    onChange={handleChange}
+                    placeholder="Last Name"
                     className="bg-background-secondary border-border focus:border-primary"
                   />
                 </div>
               </div>
-              
+
               <div className="space-y-2">
                 <label className="text-sm font-medium">Email</label>
-                <Input 
-                  type="email" 
-                  placeholder="john@example.com" 
+                <Input
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="xyz@example.com"
                   className="bg-background-secondary border-border focus:border-primary"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <label className="text-sm font-medium">Subject</label>
-                <Input 
-                  placeholder="Project collaboration" 
+                <Input
+                  name="subject"
+                  value={form.subject}
+                  onChange={handleChange}
+                  placeholder="Related to..."
                   className="bg-background-secondary border-border focus:border-primary"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <label className="text-sm font-medium">Message</label>
-                <Textarea 
+                <Textarea
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
                   placeholder="Tell me about your project or opportunity..."
                   rows={5}
                   className="bg-background-secondary border-border focus:border-primary resize-none"
                 />
               </div>
-              
-              <Button 
-                type="submit" 
+
+              {error && <p className="text-red-500">{error}</p>}
+              {success && <p className="text-green-500">{success}</p>}
+
+              <Button
+                type="submit"
+                disabled//</form>= true //{loading}
                 className="w-full bg-primary hover:bg-primary-glow text-primary-foreground shadow-primary animate-glow"
               >
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </Card>
 
-          {/* Contact Info */}
+          {/* Contact Info + Social Links + Available For */}
           <div className="space-y-8">
             <Card className="glass-card p-8">
               <h3 className="text-2xl font-semibold mb-6 text-secondary">Get in Touch</h3>
@@ -131,7 +206,7 @@ export const ContactSection = () => {
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">{item.label}</p>
-                        <a 
+                        <a
                           href={item.href}
                           className="text-foreground hover:text-secondary transition-colors"
                         >

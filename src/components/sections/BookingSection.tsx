@@ -303,15 +303,15 @@ export const BookingSection = () => {
             <div className="space-y-3 text-sm">
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-primary" />
-                <span>contact@yourname.com</span>
+                <span>birbalk99@gmail.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-primary" />
-                <span>+1 (555) 123-4567</span>
+                <span>+91-7220972090</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-primary" />
-                <span>Mon-Fri, 9AM-6PM EST</span>
+                <span>Mon-Fri, 9AM-6PM IST</span>
               </div>
             </div>
           </Card>
