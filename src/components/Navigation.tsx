@@ -11,8 +11,6 @@ import { ResumePreview } from "@/components/ResumePreview";
 import { useMemo } from "react";
 import { CoolMode } from "@/components/magicui/cool-mode";
 
-
-
 // --- NAV ITEMS ANIMATION VARIANTS ---
 const navItemVariants = {
   initial: { y: -24, opacity: 0 },
@@ -257,9 +255,6 @@ export const Navigation = () => {
               </span>
             </CoolMode>
           </div>
-
-
-
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {/* Group 1: Navigate */}
