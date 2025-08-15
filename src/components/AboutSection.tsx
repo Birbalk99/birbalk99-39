@@ -28,25 +28,18 @@ const skills = [
 const technologies = [
   // 🧑‍💻 Programming & Scripting
   "Python", "SQL", "R",
-
   // 📚 AI/ML/DL Libraries
   "TensorFlow", "PyTorch", "Scikit-learn", "Keras", "XGBoost",
-
   // 🧠 Generative AI & LLMs
   "LangChain", "Llama", "OpenAI API", "Hugging Face", "LLMOPS", "Prompt Engineering",
-
   // 📊 Data Analysis & Visualization
   "Pandas", "NumPy", "Matplotlib", "Seaborn", "Plotly", "Tableau", "Excel",
-
   // 🚀 Backend & APIs
   "FastAPI", "Flask", "Django", "WebSockets", "Celery", "Redis",
-
   // 🛢️ Databases & Vector Stores
   "MongoDB", "FAISS", "Pinecone", "ChromaDB", "SQL", "AWS DocumentDB",
-
   // ☁️ Cloud & DevOps
   "AWS", "Azure", "GCP", "AWS Bedrock", "AWS Lambda", "Docker", "Git",
-
   // 📓 Notebooks & IDEs
   "Jupyter", "Google Colab", "VS Code", "Replit"
 ];

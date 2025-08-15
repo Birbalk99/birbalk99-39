@@ -20,8 +20,8 @@ const navItemVariants = {
     transition: {
       delay: 0.08 * i,
       type: "spring" as const,
-      stiffness: 400,
-      damping: 32,
+      stiffness: 180,
+      damping: 26,
     },
   }),
   exit: { y: -24, opacity: 0, transition: { duration: 0.2 } },
@@ -178,12 +178,6 @@ function getActiveSection() {
   return active;
 }
 
-// --- CSS VARIABLES FOR GLOW/SHADOWS (add to global CSS) ---
-// :root {
-//   --primary-glow: #7dd3fc88;
-//   --box-shadow: #0ea5e988;
-// }
-
 // --- ANIMATION HELPERS (for Navigation component) ---
 export {
   navItemVariants,
@@ -207,8 +201,16 @@ export const Navigation = () => {
   const { isOpen: isBoxOpen, triggerElement, openBox, closeBox } = useBoxTransition();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setCurrentSection(getActiveSection());
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -234,14 +236,15 @@ export const Navigation = () => {
     const index = Math.floor(Math.random() * logoOptions.length);
     return logoOptions[index];
   }, []);
-
+{/* <div className="h-6 border-l border-border mx-4" /> */}
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
       scrolled ? "bg-background/80 backdrop-blur-lg border-b border-border shadow-subtle" : "bg-transparent"
     }`}>
       <div className="w-full px-4 md:px-8">
-        <div className="flex items-center justify-between h-16">
+        {/* <div className="flex items-center justify-between h-16"> */}
+        <div className="navbar-inner flex items-center gap-10 h-16">
           {/* Logo */}
           <div className="flex items-center gap-3">
             <img
@@ -250,40 +253,39 @@ export const Navigation = () => {
               className="w-14 h-12 object-contain animate-spin-slow"
             />
             <CoolMode>
-              <span className="text-xl font-bold gradient-text">
-                The Birbal Studio
+              <span className="text-xl font-bold gradient-text">The Birbal Studio
               </span>
             </CoolMode>
           </div>
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8 ml-auto">
             {/* Group 1: Navigate */}
             <div className="flex items-center space-x-6">
-              {navItems.map((item, i) => (
-                <motion.button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  variants={navItemVariants}
-                  custom={i}
+            {navItems.map((item, i) => (
+              <motion.button
+                key={item.name}
+                onClick={() => scrollToSection(item.href)}
+                variants={navItemVariants}
+                custom={i}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                className="text-foreground hover:text-primary transition-colors relative group font-medium"
+              >
+                {item.name}
+                <motion.span
+                  variants={navUnderlineVariants}
                   initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  className="text-foreground hover:text-primary transition-colors relative group font-medium"
-                >
-                  {item.name}
-                  <motion.span
-                    variants={navUnderlineVariants}
-                    initial="initial"
-                    whileHover="hover"
-                    className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
-                  />
-                </motion.button>
-              ))}
-            </div>
-            {/* Divider */}
-            <div className="h-6 border-l border-border mx-4" />
+                  whileHover="hover"
+                  className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
+                />
+              </motion.button>
+            ))}
+          </div>
+          {/* Divider */}
+          <div className="h-6 border-l border-border mx-4" />            
             {/* Group 2: Explore */}
-            <div className="flex items-center space-x-4">
+            <div className="flex justify-center items-center space-x-4">
               {boxItems.map((item, index) => (
                 <motion.button
                   key={item.name}
@@ -307,14 +309,17 @@ export const Navigation = () => {
                 </motion.button>
               ))}
             </div>
-            {/* Resume Button */}
-            <Button 
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground ml-6"
-              onClick={() => setShowResume(true)}
-            >
-              Resume
-            </Button>
+
+            {/* Group 3: Resume Button */}
+            <div className="flex justify-end">
+              <Button 
+                variant="outline"
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                onClick={() => setShowResume(true)}
+              >
+                Resume
+              </Button>
+            </div>
           </div>
 
           {/* Mobile menu button */}
