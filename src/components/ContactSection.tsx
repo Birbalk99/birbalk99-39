@@ -114,7 +114,7 @@ export const ContactSection = () => {
             Let's <span className="gradient-text">Connect</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Interested in collaborating on Data Scientist/Generative AI Project or discussing opportunities? I'd love to hear from you.
+            Interested in collaborating on Data Scientist/Generative AI Project or discussing opportunities? I had love to hear from you.
           </p>
         </div>
         <div className="grid lg:grid-cols-2 gap-12">
