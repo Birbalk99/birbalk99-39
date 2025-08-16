@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, BookOpen, MessageSquare, Calendar, Briefcase } from "lucide-react";
+import { Menu, X, BookOpen, MessageSquare, Calendar, Briefcase, Home, User, FolderGit2, Mail } from "lucide-react";
 import { BoxTransition, useBoxTransition } from './BoxTransition';
 import { ArticlesSection } from './sections/ArticlesSection';
 import { FeedbackSection } from './sections/FeedbackSection';
@@ -141,11 +141,12 @@ const themeIconVariants = {
 
 // --- DATA ---
 const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" }
+  { name: "Home", href: "#home", icon: Home },
+  { name: "About", href: "#about", icon: User },
+  { name: "Projects", href: "#projects", icon: FolderGit2 },
+  { name: "Contact", href: "#contact", icon: Mail },
 ];
+
 
 const boxItems = [
   { name: 'Articles', icon: BookOpen, component: ArticlesSection,disabled: true },
@@ -270,9 +271,10 @@ export const Navigation = () => {
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                className="text-foreground hover:text-primary transition-colors relative group font-medium"
+               className="flex items-center gap-2 text-foreground hover:text-primary transition-colors relative group font-medium"
+
               >
-                {item.name}
+                <item.icon className="w-4 h-4" />{item.name}
                 <motion.span
                   variants={navUnderlineVariants}
                   initial="initial"
