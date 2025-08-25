@@ -156,9 +156,7 @@ const boxItems = [
 ];
 
 const logoOptions = [
-  "/logo.gif",
-  "/logo-1.gif",
-  "/logo-3.gif"
+  "/logo.webp",
 ];
 
 // --- UTILS ---
@@ -232,7 +230,7 @@ export const Navigation = () => {
   };
 
   // Random logo selection
-  const logoOptions = ["/logo.gif", "/logo-1.gif", "/logo-2.gif"];
+  const logoOptions = ["/logo.webp"];
   const randomLogo = useMemo(() => {
     const index = Math.floor(Math.random() * logoOptions.length);
     return logoOptions[index];

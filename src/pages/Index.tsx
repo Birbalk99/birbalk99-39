@@ -26,7 +26,7 @@ const Index = () => {
             {/* Logo and Brand */}
             <div className="flex items-center space-x-2">
               <img
-                src="/logo.gif"
+                src="/logo.webp"
                 alt="The Birbal Studio Logo"
                 className="w-7 h-7 rounded-full"
               />
