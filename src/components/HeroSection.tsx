@@ -1,22 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { ChevronDown, Download } from "lucide-react";
 import { Typewriter } from "react-simple-typewriter";
-import { SparklesText } from "@/components/magicui/sparkles-text";
 
-
-const FloatingParticle = ({ delay }: { delay: number }) => (
-  <div 
-    className="data-particle"
-    style={{
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      width: `${Math.random() * 8 + 4}px`,
-      height: `${Math.random() * 8 + 4}px`,
-      animationDelay: `${delay}s`
-    }}
-  />
-);
 const badgeList = [
   { label: "LLMs", icon: "llm.gif" },
   { label: "OpenCV", icon: "OpenCV.png" },
@@ -66,13 +51,6 @@ export const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-           
-      {/* Animated particles */}
-      <div className="absolute inset-0 z-10">
-        {particles.map((i) => (
-          <FloatingParticle key={i} delay={i * 0.3} />
-        ))}
-      </div>
 
       {/* Glow effects */}
       <div className="hero-glow absolute top-1/4 left-1/4 w-96 h-96 z-10" />
@@ -83,9 +61,7 @@ export const HeroSection = () => {
           <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
             Hi, I'm <span className="gradient-text">Birbal Kumar</span>
             <br />
-            <SparklesText>
               <span className="text-glow text-6xl md:text-8xl">Data Scientist</span>
-            </SparklesText>
           </h1>
           <div className="text-xl md:text-2xl text-muted-foreground mb-4 mx-auto leading-relaxed min-h-[80px] w-full max-w-8xl text-justify">
             <Typewriter

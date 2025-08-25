@@ -7,7 +7,7 @@ This project showcases advanced work in **AI**, **Generative AI**, **LLMs**, and
 
 ## 🔍 Project Overview
 
-- **Live URL**: [the-birbal-studio.vercel.app](https://the-birbal-studio.vercel.app/)
+- **Live URL**: [the-birbal-studio](https://birbalstudio.com/)
 - **Hosted on**: Vercel
 - **Tech Stack**: React + TypeScript + Tailwind CSS + shadcn/ui
 

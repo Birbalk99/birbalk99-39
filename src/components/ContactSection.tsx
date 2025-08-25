@@ -237,15 +237,26 @@ export const ContactSection = () => {
                 })}
               </div>
             </Card>
-
             <Card className="glass-card p-8">
-              <h3 className="text-2xl font-semibold mb-4 text-primary">Available for</h3>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>• Full-time opportunities</li>
-                <li>• Consulting projects</li>
-                <li>• Research collaborations</li>
-                <li>• Speaking engagements</li>
-              </ul>
+                <h3 className="text-2xl font-bold mb-6 text-center text-primary">Available for </h3>
+                <ul className="space-y-3 text-muted-foreground text-lg">
+                  <li className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-primary"></span>
+                    Full-time opportunities
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-primary"></span>
+                    Consulting projects
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-primary"></span>
+                    Research collaborations
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-primary"></span>
+                    Speaking engagements
+                  </li>
+                </ul>
             </Card>
           </div>
         </div>
